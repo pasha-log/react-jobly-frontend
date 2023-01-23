@@ -1,32 +1,39 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+// import Home from './Home';
+// import CompaniesList from './CompaniesList';
+// import Company from './Company';
+// import JobsList from './JobsList';
+// import LoginForm from './LoginForm';
+// import SignupForm from './SignupForm';
+// import EditProfileForm from './EditProfileForm';
 
-const Routes = () => {
+const JoblyRoutes = () => {
 	return (
-		<Switch>
+		<Routes>
 			<Route exact path="/">
-				<Home />
+				{/* <Home /> */}
 			</Route>
 			<Route exact path="/companies">
-				<CompaniesList />
+				{/* <CompaniesList /> */}
 			</Route>
 			<Route exact path="/companies/:company">
-				<Company />
+				{/* <Company /> */}
 			</Route>
 			<Route exact path="/jobs">
-				<JobsList />
+				{/* <JobsList /> */}
 			</Route>
 			<Route exact path="/login">
-				<LoginForm />
+				{/* <LoginForm /> */}
 			</Route>
 			<Route exact path="/signup">
-				<SignupForm />
+				{/* <SignupForm /> */}
 			</Route>
 			<Route exact path="/profile">
-				<EditProfileForm />
+				{/* <EditProfileForm /> */}
 			</Route>
-			<Redirect to="/" />
-		</Switch>
+			{/* <Navigate to="/" /> */}
+		</Routes>
 	);
 };
 
-export default Routes;
+export default JoblyRoutes;
