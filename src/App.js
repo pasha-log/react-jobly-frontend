@@ -1,25 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			{/* App - Job detail/Companies' job details page 
+      (detail page component, state: applied or not, job props: descriptions, titles, salary, equity, company props: descriptions, name, jobs) 
+      - Companies list (props: list of jobs it has) - SignupForm(formData, addNewUser)/LoginForm(formData, logUserIn)/EditProfileForm(formData, editUserInfo) - */}
+		</div>
+	);
 }
 
 export default App;
