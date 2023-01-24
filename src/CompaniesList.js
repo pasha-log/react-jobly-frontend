@@ -1,21 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import CompanyCard from './CompanyCard.js';
 
 const CompaniesList = ({ companies }) => {
 	return (
 		<section>
-			<ListGroup>
+			<div>
 				{companies.map((company) => (
 					<Link to={`/companies/${company.handle}`} key={company.handle}>
-						<ListGroupItem>
-							{company.name}
-							{company.description}
-							<img src={company.logoUrl} alt="" />
-						</ListGroupItem>
+						<CompanyCard company={company} />
 					</Link>
 				))}
-			</ListGroup>
+			</div>
 		</section>
 	);
 };
