@@ -1,16 +1,22 @@
 .Username,
 .Password,
-.LoginButton,
+.Firstname,
+.Lastname,
+.Email,
+.SignupButton,
 h1 {
 	margin-top: 1rem;
 }
 
-.LoginButton {
+.SignupButton {
 	margin-bottom: 1rem;
 }
 
 .Username,
-.Password {
+.Password,
+.Firstname,
+.Lastname,
+.Email {
 	margin-left: 1rem;
 	margin-right: 1rem;
 }

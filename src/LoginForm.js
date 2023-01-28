@@ -41,7 +41,12 @@ const LoginForm = () => {
 									render={({ field }) => <Input type="password" placeholder="Password" {...field} />}
 								/>
 							</div>
-							<Button type="submit" style={{ backgroundColor: '#5c5cf8' }} size="lg">
+							<Button
+								className="LoginButton"
+								type="submit"
+								style={{ backgroundColor: '#5c5cf8' }}
+								size="lg"
+							>
 								Submit
 							</Button>
 						</div>

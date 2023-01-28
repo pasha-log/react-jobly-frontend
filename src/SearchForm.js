@@ -14,30 +14,32 @@ const SearchForm = ({ getSearchTerm }) => {
 		reset();
 	};
 	return (
-		<Container>
-			<Form onSubmit={handleSubmit(onSubmit)}>
-				<FormGroup row>
-					<Col
-						md={{
-							offset: 3,
-							size: 6
-						}}
-						sm="12"
-					>
-						<div className="input-group">
-							<Controller
-								name="searchTerm"
-								control={control}
-								render={({ field }) => <Input placeholder="Enter search term..." {...field} />}
-							/>
-							<Button type="submit" style={{ backgroundColor: '#5c5cf8' }} size="lg">
-								Submit
-							</Button>
-						</div>
-					</Col>
-				</FormGroup>
-			</Form>
-		</Container>
+		<div>
+			<Container>
+				<Form onSubmit={handleSubmit(onSubmit)}>
+					<FormGroup row>
+						<Col
+							md={{
+								offset: 3,
+								size: 6
+							}}
+							sm="12"
+						>
+							<div className="input-group">
+								<Controller
+									name="searchTerm"
+									control={control}
+									render={({ field }) => <Input placeholder="Enter search term..." {...field} />}
+								/>
+								<Button type="submit" style={{ backgroundColor: '#5c5cf8' }} size="lg">
+									Submit
+								</Button>
+							</div>
+						</Col>
+					</FormGroup>
+				</Form>
+			</Container>
+		</div>
 	);
 };
 
