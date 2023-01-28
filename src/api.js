@@ -41,19 +41,20 @@ class JoblyApi {
 		return res.company;
 	}
 
-	// Get entire list of all companies.
+	// Get entire list of companies & handle search queries.
 
 	static async getAllCompanies(name) {
 		let res;
 		name ? (res = await this.request(`companies?name=${name}`)) : (res = await this.request(`companies/`));
 		return res.companies;
-		// if (name) {
-		// 	let res = await this.request(`companies?name=${name}`);
-		// 	return res.companies;
-		// } else {
-		// 	let res = await this.request(`companies/`);
-		// 	return res.companies;
-		// }
+	}
+
+	// Get entire list of jobs & handle search queries.
+
+	static async getAllJobs(title) {
+		let res;
+		title ? (res = await this.request(`jobs?title=${title}`)) : (res = await this.request(`jobs/`));
+		return res.jobs;
 	}
 
 	// obviously, you'll add a lot here ...

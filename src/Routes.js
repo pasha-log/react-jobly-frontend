@@ -4,8 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 
 // import Home from './Home';
 import CompaniesList from './CompaniesList';
+import CompanyDetail from './CompanyDetail';
 // import Company from './Company';
-// import JobsList from './JobsList';
+import JobsList from './JobsList';
 // import LoginForm from './LoginForm';
 // import SignupForm from './SignupForm';
 // import EditProfileForm from './EditProfileForm';
@@ -34,12 +35,8 @@ const JoblyRoutes = () => {
 			<Route exact path="/companies" element={<CompaniesList />} />
 			{/* <CompaniesList companies={companies} /> */}
 			{/* </Route> */}
-			<Route exact path="/companies/:company">
-				{/* <Company /> */}
-			</Route>
-			<Route exact path="/jobs">
-				{/* <JobsList /> */}
-			</Route>
+			<Route exact path="/companies/:handle" element={<CompanyDetail />} />
+			<Route exact path="/jobs" element={<JobsList />} />
 			<Route exact path="/login">
 				{/* <LoginForm /> */}
 			</Route>

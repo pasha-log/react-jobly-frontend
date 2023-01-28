@@ -10,7 +10,6 @@ const SearchForm = ({ getSearchTerm }) => {
 	});
 
 	const onSubmit = (data) => {
-		// console.log(data);
 		getSearchTerm(data);
 		reset();
 	};
@@ -45,3 +44,4 @@ const SearchForm = ({ getSearchTerm }) => {
 export default SearchForm;
 
 // curl -X GET -H 'Content-Type: application/json' 'http://localhost:3001/companies?name=blargh'
+// curl -X GET -H 'Content-Type: application/json' 'http://localhost:3001/companies/anderson-arias-morrow'
