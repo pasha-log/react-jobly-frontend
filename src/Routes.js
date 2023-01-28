@@ -7,6 +7,7 @@ import CompaniesList from './CompaniesList';
 import CompanyDetail from './CompanyDetail';
 // import Company from './Company';
 import JobsList from './JobsList';
+import LoginForm from './LoginForm';
 // import LoginForm from './LoginForm';
 // import SignupForm from './SignupForm';
 // import EditProfileForm from './EditProfileForm';
@@ -43,9 +44,8 @@ const JoblyRoutes = () => {
 			<Route exact path="/signup">
 				{/* <SignupForm /> */}
 			</Route>
-			<Route exact path="/profile">
-				{/* <EditProfileForm /> */}
-			</Route>
+			{/* <Route exact path="/profile" element={<SignupForm />} /> */}
+
 			{/* <Navigate to="/" /> */}
 		</Routes>
 	);
