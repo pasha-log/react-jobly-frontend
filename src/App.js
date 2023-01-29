@@ -2,21 +2,57 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import JoblyRoutes from './Routes';
 import NavBar from './NavBar';
+import JoblyApi from './api';
+import { useEffect, useState } from 'react';
+import CurrentUserContext from './CurrentUserContext';
 
-// {
-// 	/* App - Job detail/Companies' job details page
-// (detail page component, state: applied or not, job props: descriptions, titles, salary, equity, company props: descriptions, name, jobs)
-// - Companies list (props: list of jobs it has) - SignupForm(formData, addNewUser)/LoginForm(formData, logUserIn)/EditProfileForm(formData, editUserInfo) - */
-// }
 function App() {
+	const [ token, setToken ] = useState(null);
+	const [ currentUser, setCurrentUser ] = useState({});
+	const [ username, setUsername ] = useState('');
+
+	useEffect(
+		() => {
+			const getUserByUsername = async (username) => {
+				let user = await JoblyApi.getUser(username);
+				// console.log(user);
+				setCurrentUser(user);
+			};
+			username && token ? getUserByUsername(username) : console.log('Logged out');
+		},
+		[ token ]
+	);
+
+	const setTokenAfterRegister = async (data, username) => {
+		let token = await JoblyApi.registerUser(data);
+		setUsername(username);
+		setToken(token);
+	};
+
+	const setTokenAfterLogin = async (data, username) => {
+		let token = await JoblyApi.loginUser(data);
+		setUsername(username);
+		setToken(token);
+	};
+
+	const logOutUser = () => {
+		setToken(null);
+		JoblyApi.token = null;
+	};
+
 	return (
 		<div className="App">
-			<BrowserRouter>
-				<NavBar />
-				<main>
-					<JoblyRoutes />
-				</main>
-			</BrowserRouter>
+			<CurrentUserContext.Provider value={{ token, currentUser }}>
+				<BrowserRouter>
+					<NavBar logOutUser={logOutUser} />
+					<main>
+						<JoblyRoutes
+							setTokenAfterRegister={setTokenAfterRegister}
+							setTokenAfterLogin={setTokenAfterLogin}
+						/>
+					</main>
+				</BrowserRouter>
+			</CurrentUserContext.Provider>
 		</div>
 	);
 }

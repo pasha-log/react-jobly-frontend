@@ -37,25 +37,53 @@ class JoblyApi {
 	/** Get details on a company by handle. */
 
 	static async getCompany(handle) {
-		let res = await this.request(`companies/${handle}`);
-		return res.company;
+		let response = await this.request(`companies/${handle}`);
+		return response.company;
 	}
 
 	// Get entire list of companies & handle search queries.
 
 	static async getAllCompanies(name) {
-		let res;
-		name ? (res = await this.request(`companies?name=${name}`)) : (res = await this.request(`companies/`));
-		return res.companies;
+		let response;
+		name
+			? (response = await this.request(`companies?name=${name}`))
+			: (response = await this.request(`companies/`));
+		return response.companies;
 	}
 
 	// Get entire list of jobs & handle search queries.
 
 	static async getAllJobs(title) {
-		let res;
-		title ? (res = await this.request(`jobs?title=${title}`)) : (res = await this.request(`jobs/`));
-		return res.jobs;
+		let response;
+		title ? (response = await this.request(`jobs?title=${title}`)) : (response = await this.request(`jobs/`));
+		return response.jobs;
 	}
+
+	// Register someone in with this function, that should return a token.
+
+	static async registerUser(registerInfo) {
+		let response = await this.request('auth/register', registerInfo, 'post');
+		JoblyApi.token = response.token;
+		return response.token;
+	}
+
+	// Log someone in with this function, that should return a token.
+
+	static async loginUser(loginInfo) {
+		let response = await this.request('auth/token', loginInfo, 'post');
+		JoblyApi.token = response.token;
+		return response.token;
+	}
+
+	// Get user by username.
+
+	static async getUser(username) {
+		let response = await this.request(`users/${username}`);
+		// console.log(response.user);
+		return response.user;
+	}
+	// curl -X POST -H 'Content-Type: application/json' -d '{ "username":"PashaLog", "password":"Iloveemily", "firstName":"Paul", "lastName":"Loguinov", "email":"pasha.log@gmail.com" }' 'http://localhost:3001/auth/register'
+	// curl -X GET -H 'Content-Type: application/json' -d "{'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY3NDk3MTg2MX0.MhnGOv0zg2DQQRPwbJqC8fzWfeLpfEinT8qgGCG5yZg'}" 'http://localhost:3001/users/TestUser'
 
 	// obviously, you'll add a lot here ...
 }
@@ -63,7 +91,7 @@ class JoblyApi {
 export default JoblyApi;
 
 // for now, put token ("testuser" / "password" on class)
-JoblyApi.token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ' +
-	'SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0.' +
-	'FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc';
+// JoblyApi.token =
+// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ' +
+// 	'SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0.' +
+// 	'FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc';

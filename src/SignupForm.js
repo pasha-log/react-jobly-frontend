@@ -1,21 +1,24 @@
 import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
 import './SignupForm.css';
+import { useNavigate } from 'react-router-dom';
 
-const SignupForm = () => {
+const SignupForm = ({ setTokenAfterRegister }) => {
+	const navigate = useNavigate();
 	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
 			username: '',
 			password: '',
-			firstname: '',
-			lastname: '',
+			firstName: '',
+			lastName: '',
 			email: ''
 		}
 	});
 
 	const onSubmit = (data) => {
-		console.log(data);
+		setTokenAfterRegister(data, data.username);
 		reset();
+		navigate('/');
 	};
 	return (
 		<Container>
@@ -37,25 +40,25 @@ const SignupForm = () => {
 									render={({ field }) => <Input placeholder="Username" {...field} />}
 								/>
 							</div>
-							<div className="Password">
-								<Controller
-									name="password"
-									control={control}
-									render={({ field }) => <Input type="password" placeholder="Password" {...field} />}
-								/>
-							</div>
 							<div className="Firstname">
 								<Controller
-									name="firstname"
+									name="firstName"
 									control={control}
 									render={({ field }) => <Input placeholder="Firstname" {...field} />}
 								/>
 							</div>
 							<div className="Lastname">
 								<Controller
-									name="lastname"
+									name="lastName"
 									control={control}
 									render={({ field }) => <Input placeholder="Lastname" {...field} />}
+								/>
+							</div>
+							<div className="Password">
+								<Controller
+									name="password"
+									control={control}
+									render={({ field }) => <Input type="password" placeholder="Password" {...field} />}
 								/>
 							</div>
 							<div className="Email">

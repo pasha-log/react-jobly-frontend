@@ -1,18 +1,21 @@
 import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
 import './LoginForm.css';
+import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({ setTokenAfterLogin }) => {
+	const navigate = useNavigate();
 	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
-			username: '',
-			password: ''
+			username: 'TestUser',
+			password: 'TestUser'
 		}
 	});
 
 	const onSubmit = (data) => {
-		console.log(data);
+		setTokenAfterLogin(data, data.username);
 		reset();
+		navigate('/');
 	};
 	return (
 		<Container>
