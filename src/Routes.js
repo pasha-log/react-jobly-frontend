@@ -5,7 +5,7 @@ import CompanyDetail from './CompanyDetail';
 import JobsList from './JobsList';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
-// import EditProfileForm from './EditProfileForm';
+import EditProfileForm from './EditProfileForm';
 import RequireAuth from './RequireAuth';
 
 const JoblyRoutes = ({ setTokenAfterLogin, setTokenAfterRegister }) => {
@@ -41,9 +41,15 @@ const JoblyRoutes = ({ setTokenAfterLogin, setTokenAfterRegister }) => {
 			/>
 			<Route exact path="/login" element={<LoginForm setTokenAfterLogin={setTokenAfterLogin} />} />
 			<Route exact path="/signup" element={<SignupForm setTokenAfterRegister={setTokenAfterRegister} />} />
-			{/* <Route exact path="/profile" element={<SignupForm />} /> */}
-
-			{/* <Navigate to="/" /> */}
+			<Route
+				exact
+				path="/profile"
+				element={
+					<RequireAuth>
+						<EditProfileForm />
+					</RequireAuth>
+				}
+			/>
 		</Routes>
 	);
 };
