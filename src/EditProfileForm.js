@@ -1,24 +1,24 @@
 import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
-import './SignupForm.css';
-import { useNavigate } from 'react-router-dom';
+import './EditProfileForm.css';
+import { useContext } from 'react';
+import CurrentUserContext from './CurrentUserContext';
 
-const EditProfileForm = ({ setTokenAfterRegister }) => {
-	const navigate = useNavigate();
-	const { control, handleSubmit, reset } = useForm({
+const EditProfileForm = ({ editProfileInfo }) => {
+	const { currentUser, alert } = useContext(CurrentUserContext);
+	const { control, handleSubmit } = useForm({
 		defaultValues: {
-			username: '',
-			firstName: '',
-			lastName: '',
-			email: ''
+			firstName: currentUser.firstName,
+			lastName: currentUser.lastName,
+			password: '',
+			email: currentUser.email
 		}
 	});
 
 	const onSubmit = (data) => {
-		setTokenAfterRegister(data, data.username);
-		reset();
-		navigate('/');
+		editProfileInfo(data);
 	};
+
 	return (
 		<Container>
 			<Form onSubmit={handleSubmit(onSubmit)}>
@@ -32,13 +32,6 @@ const EditProfileForm = ({ setTokenAfterRegister }) => {
 					>
 						<div className="FormContainer">
 							<h1>Edit Your Profile</h1>
-							<div className="Username">
-								<Controller
-									name="username"
-									control={control}
-									render={({ field }) => <Input placeholder="Username" {...field} />}
-								/>
-							</div>
 							<div className="Firstname">
 								<Controller
 									name="firstName"
@@ -53,6 +46,13 @@ const EditProfileForm = ({ setTokenAfterRegister }) => {
 									render={({ field }) => <Input placeholder="Lastname" {...field} />}
 								/>
 							</div>
+							<div className="Password">
+								<Controller
+									name="password"
+									control={control}
+									render={({ field }) => <Input type="password" placeholder="Password" {...field} />}
+								/>
+							</div>
 							<div className="Email">
 								<Controller
 									name="email"
@@ -60,8 +60,9 @@ const EditProfileForm = ({ setTokenAfterRegister }) => {
 									render={({ field }) => <Input type="email" placeholder="Email" {...field} />}
 								/>
 							</div>
+							{alert}
 							<Button
-								className="SignupButton"
+								className="EditProfileButton"
 								type="submit"
 								style={{ backgroundColor: '#5c5cf8' }}
 								size="lg"

@@ -6,8 +6,10 @@ import JoblyApi from './api';
 import { useEffect, useState } from 'react';
 import CurrentUserContext from './CurrentUserContext';
 import useLocalStorage from './hooks/useLocalStorage';
+import Alert from './Alert.js';
 
 function App() {
+	const [ alert, setAlert ] = useState();
 	const [ currentUser, setCurrentUser ] = useState();
 	const [ storedValue, setValue ] = useLocalStorage();
 
@@ -38,15 +40,23 @@ function App() {
 		setValue(null);
 	};
 
+	const editProfileInfo = async (data) => {
+		let res = await JoblyApi.patchUser(storedValue.username, data);
+		res.user
+			? setAlert(<Alert type={'success'} message="Updated successfully." />)
+			: setAlert(<Alert type={'danger'} message={res} />);
+	};
+
 	return (
 		<div className="App">
-			<CurrentUserContext.Provider value={{ storedValue, currentUser }}>
+			<CurrentUserContext.Provider value={{ storedValue, currentUser, alert }}>
 				<BrowserRouter>
 					<NavBar logOutUser={logOutUser} />
 					<main>
 						<JoblyRoutes
 							setTokenAfterRegister={setTokenAfterRegister}
 							setTokenAfterLogin={setTokenAfterLogin}
+							editProfileInfo={editProfileInfo}
 						/>
 					</main>
 				</BrowserRouter>

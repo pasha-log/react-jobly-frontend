@@ -1,0 +1,40 @@
+.Password,
+.Firstname,
+.Lastname,
+.Email,
+.EditProfileButton,
+.alert-success,
+.alert-danger,
+h1 {
+	margin-top: 1rem;
+}
+
+.EditProfileButton {
+	margin-bottom: 1rem;
+}
+
+.Password,
+.Firstname,
+.Lastname,
+.Email,
+.alert-success,
+.alert-danger {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.FormContainer {
+	margin-top: 6rem;
+	border-radius: 1rem;
+	box-shadow: 5px 10px 18px #888888;
+}
+
+.alert-success {
+	border-radius: 1rem;
+	background-color: rgb(180, 215, 180, 0.5);
+}
+
+.alert-danger {
+	border-radius: 1rem;
+	background-color: rgb(253, 171, 171, 0.5);
+}

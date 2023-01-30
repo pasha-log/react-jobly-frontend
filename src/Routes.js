@@ -8,7 +8,7 @@ import SignupForm from './SignupForm';
 import EditProfileForm from './EditProfileForm';
 import RequireAuth from './RequireAuth';
 
-const JoblyRoutes = ({ setTokenAfterLogin, setTokenAfterRegister }) => {
+const JoblyRoutes = ({ setTokenAfterLogin, setTokenAfterRegister, editProfileInfo }) => {
 	return (
 		<Routes>
 			<Route exact path="/" element={<Home />} />
@@ -46,7 +46,7 @@ const JoblyRoutes = ({ setTokenAfterLogin, setTokenAfterRegister }) => {
 				path="/profile"
 				element={
 					<RequireAuth>
-						<EditProfileForm />
+						<EditProfileForm editProfileInfo={editProfileInfo} />
 					</RequireAuth>
 				}
 			/>

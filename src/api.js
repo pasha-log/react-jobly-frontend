@@ -28,7 +28,8 @@ class JoblyApi {
 		} catch (err) {
 			console.error('API Error:', err.response);
 			let message = err.response.data.error.message;
-			throw Array.isArray(message) ? message : [ message ];
+			// throw Array.isArray(message) ? message : [ message ];
+			return message[0];
 		}
 	}
 
@@ -79,19 +80,16 @@ class JoblyApi {
 
 	static async getUser(username) {
 		let response = await this.request(`users/${username}`);
-		// console.log(response.user);
 		return response.user;
 	}
-	// curl -X POST -H 'Content-Type: application/json' -d '{ "username":"PashaLog", "password":"Iloveemily", "firstName":"Paul", "lastName":"Loguinov", "email":"pasha.log@gmail.com" }' 'http://localhost:3001/auth/register'
-	// curl -X GET -H 'Content-Type: application/json' -d "{'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RVc2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY3NDk3MTg2MX0.MhnGOv0zg2DQQRPwbJqC8fzWfeLpfEinT8qgGCG5yZg'}" 'http://localhost:3001/users/TestUser'
 
-	// obviously, you'll add a lot here ...
+	// Edit user's profile information.
+
+	static async patchUser(username, newUserInfo) {
+		let response = await this.request(`users/${username}`, newUserInfo, 'patch');
+		// return response;
+		return response;
+	}
 }
 
 export default JoblyApi;
-
-// for now, put token ("testuser" / "password" on class)
-// JoblyApi.token =
-// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ' +
-// 	'SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0.' +
-// 	'FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc';
