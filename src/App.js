@@ -5,44 +5,42 @@ import NavBar from './NavBar';
 import JoblyApi from './api';
 import { useEffect, useState } from 'react';
 import CurrentUserContext from './CurrentUserContext';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
-	const [ token, setToken ] = useState(null);
-	const [ currentUser, setCurrentUser ] = useState({});
-	const [ username, setUsername ] = useState('');
+	const [ currentUser, setCurrentUser ] = useState();
+	const [ storedValue, setValue ] = useLocalStorage();
 
 	useEffect(
 		() => {
 			const getUserByUsername = async (username) => {
+				JoblyApi.token = storedValue.token;
 				let user = await JoblyApi.getUser(username);
-				// console.log(user);
 				setCurrentUser(user);
 			};
-			username && token ? getUserByUsername(username) : console.log('Logged out');
+
+			storedValue ? getUserByUsername(storedValue.username) : console.log('Logged out');
 		},
-		[ token ]
+		[ storedValue ]
 	);
 
 	const setTokenAfterRegister = async (data, username) => {
 		let token = await JoblyApi.registerUser(data);
-		setUsername(username);
-		setToken(token);
+		setValue({ token: token, username: username });
 	};
 
 	const setTokenAfterLogin = async (data, username) => {
 		let token = await JoblyApi.loginUser(data);
-		setUsername(username);
-		setToken(token);
+		setValue({ token: token, username: username });
 	};
 
 	const logOutUser = () => {
-		setToken(null);
-		JoblyApi.token = null;
+		setValue(null);
 	};
 
 	return (
 		<div className="App">
-			<CurrentUserContext.Provider value={{ token, currentUser }}>
+			<CurrentUserContext.Provider value={{ storedValue, currentUser }}>
 				<BrowserRouter>
 					<NavBar logOutUser={logOutUser} />
 					<main>

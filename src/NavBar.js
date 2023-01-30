@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import CurrentUserContext from './CurrentUserContext';
 
 const NavBar = ({ logOutUser }) => {
-	const { token, currentUser } = useContext(CurrentUserContext);
+	const { storedValue, currentUser } = useContext(CurrentUserContext);
 	return (
 		<div>
 			<Navbar expand="md">
@@ -13,7 +13,7 @@ const NavBar = ({ logOutUser }) => {
 					🏢 Jobly
 				</NavLink>
 
-				{token ? (
+				{storedValue && currentUser ? (
 					<Nav className="ml-auto" navbar>
 						<NavItem>
 							<NavLink to="/companies">Companies</NavLink>
