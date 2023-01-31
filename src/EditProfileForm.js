@@ -1,22 +1,28 @@
 import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
 import './EditProfileForm.css';
-import { useContext } from 'react';
-import CurrentUserContext from './CurrentUserContext';
+import { useState } from 'react';
+import Alert from './Alert';
 
 const EditProfileForm = ({ editProfileInfo }) => {
-	const { currentUser, alert } = useContext(CurrentUserContext);
-	const { control, handleSubmit } = useForm({
+	const [ response, setResponse ] = useState(false);
+	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
-			firstName: currentUser.firstName,
-			lastName: currentUser.lastName,
+			firstName: '',
+			lastName: '',
 			password: '',
-			email: currentUser.email
+			email: ''
 		}
 	});
 
-	const onSubmit = (data) => {
-		editProfileInfo(data);
+	const onSubmit = async (data) => {
+		let success = await editProfileInfo(data);
+		if (success === true) {
+			setResponse(true);
+		} else {
+			setResponse(success);
+			reset();
+		}
 	};
 
 	return (
@@ -60,7 +66,10 @@ const EditProfileForm = ({ editProfileInfo }) => {
 									render={({ field }) => <Input type="email" placeholder="Email" {...field} />}
 								/>
 							</div>
-							{alert}
+							{response === true ? <Alert type={'success'} message="Updated successfully." /> : null}
+							{response !== false && response !== true ? (
+								<Alert type="danger" message={response[0]} />
+							) : null}
 							<Button
 								className="EditProfileButton"
 								type="submit"

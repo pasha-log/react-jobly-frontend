@@ -6,10 +6,8 @@ import JoblyApi from './api';
 import { useEffect, useState } from 'react';
 import CurrentUserContext from './CurrentUserContext';
 import useLocalStorage from './hooks/useLocalStorage';
-import Alert from './Alert.js';
 
 function App() {
-	const [ alert, setAlert ] = useState();
 	const [ currentUser, setCurrentUser ] = useState();
 	const [ storedValue, setValue ] = useLocalStorage();
 
@@ -27,13 +25,23 @@ function App() {
 	);
 
 	const setTokenAfterRegister = async (data, username) => {
-		let token = await JoblyApi.registerUser(data);
-		setValue({ token: token, username: username });
+		let response = await JoblyApi.registerUser(data);
+		if (response.token) {
+			setValue({ token: response.token, username: username });
+			return true;
+		} else {
+			return response;
+		}
 	};
 
 	const setTokenAfterLogin = async (data, username) => {
-		let token = await JoblyApi.loginUser(data);
-		setValue({ token: token, username: username });
+		let response = await JoblyApi.loginUser(data);
+		if (response.token) {
+			setValue({ token: response.token, username: username });
+			return true;
+		} else {
+			return response;
+		}
 	};
 
 	const logOutUser = () => {
@@ -41,15 +49,18 @@ function App() {
 	};
 
 	const editProfileInfo = async (data) => {
-		let res = await JoblyApi.patchUser(storedValue.username, data);
-		res.user
-			? setAlert(<Alert type={'success'} message="Updated successfully." />)
-			: setAlert(<Alert type={'danger'} message={res} />);
+		let response = await JoblyApi.patchUser(storedValue.username, data);
+		if (response.user) {
+			setValue({ token: storedValue.token, username: response.user.username });
+			return true;
+		} else {
+			return response;
+		}
 	};
 
 	return (
 		<div className="App">
-			<CurrentUserContext.Provider value={{ storedValue, currentUser, alert }}>
+			<CurrentUserContext.Provider value={{ storedValue, currentUser }}>
 				<BrowserRouter>
 					<NavBar logOutUser={logOutUser} />
 					<main>

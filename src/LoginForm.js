@@ -2,9 +2,12 @@ import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
 import './LoginForm.css';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import Alert from './Alert.js';
 
 const LoginForm = ({ setTokenAfterLogin }) => {
 	const navigate = useNavigate();
+	const [ response, setResponse ] = useState(false);
 	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
 			username: 'TestUser',
@@ -12,10 +15,14 @@ const LoginForm = ({ setTokenAfterLogin }) => {
 		}
 	});
 
-	const onSubmit = (data) => {
-		setTokenAfterLogin(data, data.username);
-		reset();
-		navigate('/');
+	const onSubmit = async (data) => {
+		const success = await setTokenAfterLogin(data, data.username);
+		if (success === true) {
+			navigate('/');
+		} else {
+			setResponse(success);
+			reset();
+		}
 	};
 	return (
 		<Container>
@@ -44,6 +51,7 @@ const LoginForm = ({ setTokenAfterLogin }) => {
 									render={({ field }) => <Input type="password" placeholder="Password" {...field} />}
 								/>
 							</div>
+							{response !== false ? <Alert type="danger" message={response} /> : null}
 							<Button
 								className="LoginButton"
 								type="submit"

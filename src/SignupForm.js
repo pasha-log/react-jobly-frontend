@@ -2,9 +2,12 @@ import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
 import './SignupForm.css';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import Alert from './Alert';
 
 const SignupForm = ({ setTokenAfterRegister }) => {
 	const navigate = useNavigate();
+	const [ response, setResponse ] = useState(false);
 	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
 			username: '',
@@ -15,10 +18,14 @@ const SignupForm = ({ setTokenAfterRegister }) => {
 		}
 	});
 
-	const onSubmit = (data) => {
-		setTokenAfterRegister(data, data.username);
-		reset();
-		navigate('/');
+	const onSubmit = async (data) => {
+		let success = await setTokenAfterRegister(data, data.username);
+		if (success === true) {
+			navigate('/');
+		} else {
+			setResponse(success);
+			reset();
+		}
 	};
 	return (
 		<Container>
@@ -68,6 +75,7 @@ const SignupForm = ({ setTokenAfterRegister }) => {
 									render={({ field }) => <Input type="email" placeholder="Email" {...field} />}
 								/>
 							</div>
+							{response !== false ? <Alert type="danger" message={response[0]} /> : null}
 							<Button
 								className="SignupButton"
 								type="submit"

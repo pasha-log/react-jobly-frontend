@@ -29,7 +29,7 @@ class JoblyApi {
 			console.error('API Error:', err.response);
 			let message = err.response.data.error.message;
 			// throw Array.isArray(message) ? message : [ message ];
-			return message[0];
+			return message;
 		}
 	}
 
@@ -65,7 +65,7 @@ class JoblyApi {
 	static async registerUser(registerInfo) {
 		let response = await this.request('auth/register', registerInfo, 'post');
 		JoblyApi.token = response.token;
-		return response.token;
+		return response;
 	}
 
 	// Log someone in with this function, that should return a token.
@@ -73,7 +73,7 @@ class JoblyApi {
 	static async loginUser(loginInfo) {
 		let response = await this.request('auth/token', loginInfo, 'post');
 		JoblyApi.token = response.token;
-		return response.token;
+		return response;
 	}
 
 	// Get user by username.
@@ -87,7 +87,6 @@ class JoblyApi {
 
 	static async patchUser(username, newUserInfo) {
 		let response = await this.request(`users/${username}`, newUserInfo, 'patch');
-		// return response;
 		return response;
 	}
 }
