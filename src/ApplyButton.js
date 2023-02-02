@@ -1,4 +1,5 @@
 import { Button } from 'reactstrap';
+import './static/ApplyButton.css';
 
 const ApplyButton = ({ success, apply }) => {
 	return (
@@ -6,7 +7,7 @@ const ApplyButton = ({ success, apply }) => {
 			{success ? (
 				<Button color={'success'}>Applied!</Button>
 			) : (
-				<Button onClick={apply} color={'primary'}>
+				<Button className="ApplyButton" onClick={apply}>
 					Apply
 				</Button>
 			)}

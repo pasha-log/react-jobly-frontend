@@ -1,6 +1,6 @@
 import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
-import './SearchForm.css';
+import './static/SearchForm.css';
 
 const SearchForm = ({ getSearchTerm }) => {
 	const { control, handleSubmit, reset } = useForm({
@@ -31,7 +31,7 @@ const SearchForm = ({ getSearchTerm }) => {
 									control={control}
 									render={({ field }) => <Input placeholder="Enter search term..." {...field} />}
 								/>
-								<Button type="submit" style={{ backgroundColor: '#5c5cf8' }} size="lg">
+								<Button className="Search" type="submit" size="lg">
 									Submit
 								</Button>
 							</div>
@@ -44,7 +44,3 @@ const SearchForm = ({ getSearchTerm }) => {
 };
 
 export default SearchForm;
-
-// curl -X GET -H 'Content-Type: application/json' 'http://localhost:3001/companies?name=blargh'
-// curl -X GET -H 'Content-Type: application/json' 'http://localhost:3001/companies/anderson-arias-morrow'
-// curl -X POST -H 'Content-Type: application/json' 'http://localhost:3001/auth/register' -d { username='PashaLog', password='Iloveemily', firstName='Paul', lastName='Loguinov', email='pasha.log@gmail.com' }

@@ -1,0 +1,33 @@
+.HomeGreeting {
+	margin-top: 10rem;
+	padding: 5rem;
+	border-radius: 1rem;
+	background-color: #080957;
+	color: #f0f2f5;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.Start {
+	background-color: #8a8dff;
+}
+
+.Start:hover {
+	color: #080957;
+	background-color: white;
+}
+
+body {
+	background: url('./jobly-background.png') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.Logo {
+	content: url('./jobly-logo-home.png');
+	height: 10rem;
+}

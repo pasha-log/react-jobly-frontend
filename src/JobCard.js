@@ -1,6 +1,6 @@
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import { useState, useContext } from 'react';
-import './JobCard.css';
+import './static/JobCard.css';
 import CurrentUserContext from './CurrentUserContext';
 import ApplyButton from './ApplyButton';
 

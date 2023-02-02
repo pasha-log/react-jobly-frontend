@@ -1,6 +1,6 @@
 import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
-import './EditProfileForm.css';
+import './static/EditProfileForm.css';
 import { useState } from 'react';
 import Alert from './Alert';
 
@@ -70,12 +70,7 @@ const EditProfileForm = ({ editProfileInfo }) => {
 							{response !== false && response !== true ? (
 								<Alert type="danger" message={response[0]} />
 							) : null}
-							<Button
-								className="EditProfileButton"
-								type="submit"
-								style={{ backgroundColor: '#5c5cf8' }}
-								size="lg"
-							>
+							<Button className="EditProfileButton" type="submit" size="lg">
 								Save Changes
 							</Button>
 						</div>

@@ -1,4 +1,4 @@
-import './App.css';
+import './static/App.css';
 import { BrowserRouter } from 'react-router-dom';
 import JoblyRoutes from './Routes';
 import NavBar from './NavBar';
@@ -26,14 +26,6 @@ function App() {
 		},
 		[ storedValue ]
 	);
-
-	// useEffect(() => {
-	// 	const loadUserApplications = (currentUser) => {
-	// 		let apps = currentUser.applications;
-	// 		setApplications([ ...apps ]);
-	// 	};
-	// 	loadUserApplications();
-	// }, []);
 
 	const setTokenAfterRegister = async (data, username) => {
 		let response = await JoblyApi.registerUser(data);
@@ -72,16 +64,7 @@ function App() {
 	const applyToJob = async (username, jobId) => {
 		console.log(username, jobId);
 		let response = await JoblyApi.applyToJob(username, jobId);
-		if (response.applied) {
-			// applications.push(jobId);
-			// setApplications(applications);
-			return true;
-			// console.log(applications);
-			// console.log(applications.includes(jobId));
-			// return true;
-		} else {
-			return false;
-		}
+		return response.applied ? true : false;
 	};
 
 	return (

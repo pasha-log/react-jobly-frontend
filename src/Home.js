@@ -1,20 +1,51 @@
-import './Home.css';
+import './static/Home.css';
 import { useContext } from 'react';
 import CurrentUserContext from './CurrentUserContext';
-import { Link } from 'react-router-dom';
+import { Container, Col, Button } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+	const navigate = useNavigate();
 	const { storedValue, currentUser } = useContext(CurrentUserContext);
+	const goToJobs = () => {
+		navigate('/jobs');
+	};
+	const goToSignup = () => {
+		navigate('/signup');
+	};
 	return (
-		<div className="HomeGreeting">
-			<h1>Jobly</h1>
-			<p>All the jobs, in one convenient place</p>
-			{storedValue && currentUser ? (
-				<h4>Welcome back, {currentUser.firstName}!</h4>
-			) : (
-				<Link to="/signup">Signup</Link>
-			)}
-		</div>
+		<Container>
+			<Col
+				md={{
+					offset: 3,
+					size: 6
+				}}
+				sm="12"
+			>
+				<div className="HomeGreeting">
+					{storedValue && currentUser ? (
+						<h1>Welcome, {currentUser.firstName}</h1>
+					) : (
+						<img className="Logo" alt="Logo" />
+					)}
+					{storedValue && currentUser ? (
+						<div>
+							<p>Start your job search today</p>
+							<Button className="Start" onClick={goToJobs}>
+								Look for a job
+							</Button>
+						</div>
+					) : (
+						<div>
+							<p>All the jobs, in one convenient place</p>
+							<Button className="Start" onClick={goToSignup}>
+								Signup
+							</Button>
+						</div>
+					)}
+				</div>
+			</Col>
+		</Container>
 	);
 };
 

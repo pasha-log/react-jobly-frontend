@@ -1,6 +1,6 @@
 import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
-import './LoginForm.css';
+import './static/LoginForm.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Alert from './Alert.js';
@@ -52,12 +52,7 @@ const LoginForm = ({ setTokenAfterLogin }) => {
 								/>
 							</div>
 							{response !== false ? <Alert type="danger" message={response} /> : null}
-							<Button
-								className="LoginButton"
-								type="submit"
-								style={{ backgroundColor: '#5c5cf8' }}
-								size="lg"
-							>
+							<Button className="LoginButton" type="submit" size="lg">
 								Submit
 							</Button>
 						</div>

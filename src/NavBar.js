@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'reactstrap';
-import './NavBar.css';
+import './static/NavBar.css';
 import { useContext } from 'react';
 import CurrentUserContext from './CurrentUserContext';
 
@@ -10,33 +10,43 @@ const NavBar = ({ logOutUser }) => {
 		<div>
 			<Navbar expand="md">
 				<NavLink to="/" className="navbar-brand">
-					🏢 Jobly
+					<img className="NavLogo" alt="" />
 				</NavLink>
 
 				{storedValue && currentUser ? (
 					<Nav className="ml-auto" navbar>
 						<NavItem>
-							<NavLink to="/companies">Companies</NavLink>
+							<NavLink to="/companies">
+								<span className="material-symbols-outlined">apartment</span>Companies
+							</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink to="/jobs">Jobs</NavLink>
+							<NavLink to="/jobs">
+								<span className="material-symbols-outlined">work</span>Jobs
+							</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink to="/profile">Profile</NavLink>
+							<NavLink to="/profile">
+								<span className="material-symbols-outlined">person</span>Profile
+							</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink to="/" onClick={logOutUser}>
-								Logout {currentUser.username}
+							<NavLink className="Logout" to="/" onClick={logOutUser}>
+								<span className="material-symbols-outlined">logout</span>Logout {currentUser.username}
 							</NavLink>
 						</NavItem>
 					</Nav>
 				) : (
 					<Nav className="ml-auto" navbar>
 						<NavItem>
-							<NavLink to="/login">Login</NavLink>
+							<NavLink to="/login">
+								<span className="material-symbols-outlined">login</span>Login
+							</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink to="/signup">Signup</NavLink>
+							<NavLink to="/signup">
+								<span className="material-symbols-outlined">app_registration</span>Signup
+							</NavLink>
 						</NavItem>
 					</Nav>
 				)}

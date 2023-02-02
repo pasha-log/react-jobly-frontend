@@ -1,6 +1,6 @@
 import { Input, Button, Form, FormGroup, Col, Container } from 'reactstrap';
 import { useForm, Controller } from 'react-hook-form';
-import './SignupForm.css';
+import './static/SignupForm.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Alert from './Alert';
@@ -76,12 +76,7 @@ const SignupForm = ({ setTokenAfterRegister }) => {
 								/>
 							</div>
 							{response !== false ? <Alert type="danger" message={response[0]} /> : null}
-							<Button
-								className="SignupButton"
-								type="submit"
-								style={{ backgroundColor: '#5c5cf8' }}
-								size="lg"
-							>
+							<Button className="SignupButton" type="submit" size="lg">
 								Submit
 							</Button>
 						</div>

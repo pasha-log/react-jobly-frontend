@@ -10,6 +10,13 @@ h1 {
 
 .SignupButton {
 	margin-bottom: 1rem;
+	background-color: #080957;
+	border-width: 0.2rem;
+	border-color: white;
+}
+
+.SignupButton:hover {
+	background-color: #8a8dff;
 }
 
 .Username,
@@ -24,5 +31,6 @@ h1 {
 .FormContainer {
 	margin-top: 6rem;
 	border-radius: 1rem;
-	box-shadow: 5px 10px 18px #888888;
+	background-color: #080957;
+	color: white;
 }

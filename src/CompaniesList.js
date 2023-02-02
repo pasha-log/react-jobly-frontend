@@ -37,7 +37,11 @@ const CompaniesList = () => {
 				{searchTerm && <Button onClick={resetSearch}>Reset Search</Button>}
 				{noCompaniesFound && <h2>Sorry, there are no companies that match.</h2>}
 				{companies.map((company) => (
-					<Link to={`/companies/${company.handle}`} key={company.handle}>
+					<Link
+						style={{ textDecoration: 'none', color: 'black' }}
+						to={`/companies/${company.handle}`}
+						key={company.handle}
+					>
 						<CompanyCard company={company} />
 					</Link>
 				))}
