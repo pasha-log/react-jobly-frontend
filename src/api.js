@@ -89,6 +89,13 @@ class JoblyApi {
 		let response = await this.request(`users/${username}`, newUserInfo, 'patch');
 		return response;
 	}
+
+	// Add job application to user's info.
+
+	static async applyToJob(username, jobId) {
+		let response = await this.request(`users/${username}/jobs/${jobId}`, undefined, 'post');
+		return response;
+	}
 }
 
 export default JoblyApi;

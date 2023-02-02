@@ -8,6 +8,7 @@ import CurrentUserContext from './CurrentUserContext';
 import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
+	const [ applications, setApplications ] = useState();
 	const [ currentUser, setCurrentUser ] = useState();
 	const [ storedValue, setValue ] = useLocalStorage();
 
@@ -17,12 +18,22 @@ function App() {
 				JoblyApi.token = storedValue.token;
 				let user = await JoblyApi.getUser(username);
 				setCurrentUser(user);
+				let apps = user.applications;
+				setApplications([ ...apps ]);
 			};
 
 			storedValue ? getUserByUsername(storedValue.username) : console.log('Logged out');
 		},
 		[ storedValue ]
 	);
+
+	// useEffect(() => {
+	// 	const loadUserApplications = (currentUser) => {
+	// 		let apps = currentUser.applications;
+	// 		setApplications([ ...apps ]);
+	// 	};
+	// 	loadUserApplications();
+	// }, []);
 
 	const setTokenAfterRegister = async (data, username) => {
 		let response = await JoblyApi.registerUser(data);
@@ -58,9 +69,24 @@ function App() {
 		}
 	};
 
+	const applyToJob = async (username, jobId) => {
+		console.log(username, jobId);
+		let response = await JoblyApi.applyToJob(username, jobId);
+		if (response.applied) {
+			// applications.push(jobId);
+			// setApplications(applications);
+			return true;
+			// console.log(applications);
+			// console.log(applications.includes(jobId));
+			// return true;
+		} else {
+			return false;
+		}
+	};
+
 	return (
 		<div className="App">
-			<CurrentUserContext.Provider value={{ storedValue, currentUser }}>
+			<CurrentUserContext.Provider value={{ storedValue, currentUser, applyToJob, applications }}>
 				<BrowserRouter>
 					<NavBar logOutUser={logOutUser} />
 					<main>
