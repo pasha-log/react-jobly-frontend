@@ -21,5 +21,3 @@ After cloning the repository, install all dependencies by executing `npm install
 
 If you wish to run this API locally on your machine, see my [repository for the Jobly API](https://github.com/pasha-log/react-jobly-backend) for installation instructions and more info. This app expects the Jobly API to be listening on **port 3001** of localhost; make sure to change the port number of the localhost URL in `api.js` if your local deployment of the API is listening on a different port. With your local API set up, start this app in developer mode with the following command:
 ### `npm start`
-Alternatively, you can connect your local development build to my deployed web API by starting the app with the following command:
-### `REACT_APP_BASE_URL=https://sec-jobly-api.herokuapp.com npm start`
