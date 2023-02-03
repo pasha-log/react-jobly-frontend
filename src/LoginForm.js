@@ -10,8 +10,8 @@ const LoginForm = ({ setTokenAfterLogin }) => {
 	const [ response, setResponse ] = useState(false);
 	const { control, handleSubmit, reset } = useForm({
 		defaultValues: {
-			username: 'TestUser',
-			password: 'TestUser'
+			username: '',
+			password: ''
 		}
 	});
 
