@@ -19,7 +19,7 @@ const JobCard = ({ job }) => {
 					{job.companyName && <CardText>{job.companyName}</CardText>}
 					<CardText>Salary:{job.salary}</CardText>
 					<CardText>Equity:{job.equity === null ? 'None' : job.equity}</CardText>
-					{response === true || currentUser.applications.includes(job.id) ? (
+					{response === true || currentUser?.applications?.includes(job.id) ? (
 						<ApplyButton success={true} />
 					) : (
 						<ApplyButton success={false} apply={apply} />
