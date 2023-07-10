@@ -3,6 +3,7 @@ nav {
 	box-shadow: 0 2px 2px 0 #8a8dff, 0 3px 1px -2px #8a8dff, 0 1px 5px 0 #8a8dff;
 	white-space: nowrap;
 	overflow: hidden;
+	position: relative;
 }
 
 .nav-item {
@@ -62,3 +63,31 @@ span {
 	content: url('./smaller-jobly-logo.png');
 	height: 3rem;
 }
+
+.me-2 {
+	background-color: #8a8dff;
+	border-color: white;
+	border-width: .1rem;
+}
+
+@media only screen and (min-width: 600px) {
+	.collapse {
+		position: absolute;
+		right: 1rem;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.nav-item {
+		text-align: left;
+		margin-top: 1rem;
+	}
+}
+
+.nav-div {
+	width: 100%;
+}
+
+/* .nav-bar {
+	width: 100%;
+} */

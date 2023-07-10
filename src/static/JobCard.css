@@ -13,4 +13,12 @@
 	outline: none;
 	border-color: #8a8dff;
 	box-shadow: 0 0 30px #8a8dff;
+	width: 60rem;
+}
+
+@media only screen and (max-width: 600px) {
+	.my-2 {
+		width: 25rem;
+		padding: 1rem;
+	}
 }

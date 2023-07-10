@@ -4,7 +4,7 @@ import './static/CompanyCard.css';
 const CompanyCard = ({ company }) => {
 	return (
 		<div className="companyCard">
-			<Card body className="my-2" style={{ width: '60rem' }}>
+			<Card body className="my-2">
 				<CardBody>
 					<CardTitle tag="h5">{company.name}</CardTitle>
 					<CardText>{company.description}</CardText>

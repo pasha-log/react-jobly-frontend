@@ -13,7 +13,7 @@ const JobCard = ({ job }) => {
 	};
 	return (
 		<div className="jobCard">
-			<Card body className="my-2" style={{ width: '60rem' }}>
+			<Card body className="my-2">
 				<CardBody>
 					<CardTitle tag="h5">{job.title}</CardTitle>
 					{job.companyName && <CardText>{job.companyName}</CardText>}
